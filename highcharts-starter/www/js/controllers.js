@@ -1,6 +1,19 @@
 angular.module('starter.controllers', [])
 
+
 .controller('DashCtrl', function($scope) {
+
+  $scope.thispt = -1;
+  $scope.thisvalue = -1;
+
+  //$scope.$watch('chartConfig.plotOptions',function(newValue,oldValue){
+  //    console.log($scope.chartConfig.plotOptions);
+  //});
+
+  $scope.testf = function (thisvalue){
+    console.log('method 2:'+thisvalue);
+    $scope.thisvalue = thisvalue;     
+  };
 
   $scope.chartConfig = {
     "options": {
@@ -9,7 +22,20 @@ angular.module('starter.controllers', [])
       },
       "plotOptions": {
         "series": {
-          "stacking": ""
+          "stacking": "",
+          "point" : {
+            "events": {
+              "click": function () {
+                //alert('value: ' + this.y);
+                console.log($scope.thispt);    
+
+                $scope.thispt = this.y;        // 页面没有同步update
+
+                $scope.testf(this.y);          // 这也页面也没有同步update
+
+              }
+            }
+          }
         }
       }
     },

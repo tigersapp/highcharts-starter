@@ -3,5 +3,10 @@
     <div>
       <highchart id="chart1" config="chartConfig"></highchart>
     </div>
+    <input ng-model="thisvalue"> </input>
+    <div ng-controller='DashCtrl'>
+    	<p> this is {{thisvalue}}</p>
+    	<p> this is {{thispt}}</p>
+	</div>
   </ion-content>
 </ion-view>
