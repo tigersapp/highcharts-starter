@@ -3,16 +3,14 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {
 
-  $scope.thispt = -1;
-  $scope.thisvalue = -1;
+  $scope.thisDataPoint = -999;
+  $scope.testArray = ['A','B','C','D','E','F','G','H','I','J'];
+  $scope.displayArray = $scope.testArray;
 
-  //$scope.$watch('chartConfig.plotOptions',function(newValue,oldValue){
-  //    console.log($scope.chartConfig.plotOptions);
-  //});
-
-  $scope.testf = function (thisvalue){
-    console.log('method 2:'+thisvalue);
-    $scope.thisvalue = thisvalue;     
+  var assignValue = function (dataPoint){
+    // 根据图表上点击获得的值，决定这个数组显示的元素的个数
+    $scope.thisDataPoint = dataPoint;
+    $scope.displayArray = $scope.testArray.slice(0, dataPoint);      
   };
 
   $scope.chartConfig = {
@@ -25,15 +23,7 @@ angular.module('starter.controllers', [])
           "stacking": "",
           "point" : {
             "events": {
-              "click": function () {
-                //alert('value: ' + this.y);
-                console.log($scope.thispt);    
-
-                $scope.thispt = this.y;        // 页面没有同步update
-
-                $scope.testf(this.y);          // 这也页面也没有同步update
-
-              }
+              "click": function () { $scope.$apply(assignValue(this.y))}
             }
           }
         }
@@ -72,7 +62,7 @@ angular.module('starter.controllers', [])
       "enabled": false
     },
     "loading": false,
-    "size": {}
+    "size": {"height":250},
   };
 })
 

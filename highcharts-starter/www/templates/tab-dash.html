@@ -3,10 +3,13 @@
     <div>
       <highchart id="chart1" config="chartConfig"></highchart>
     </div>
-    <input ng-model="thisvalue"> </input>
-    <div ng-controller='DashCtrl'>
-    	<p> this is {{thisvalue}}</p>
-    	<p> this is {{thispt}}</p>
+    <div>
+    	<p> This contains {{thisDataPoint}} points</p>
+        <ion-list>
+          <ion-item ng-repeat="item in displayArray">
+            Hello, {{item}}!
+          </ion-item>
+        </ion-list>
 	</div>
   </ion-content>
 </ion-view>
